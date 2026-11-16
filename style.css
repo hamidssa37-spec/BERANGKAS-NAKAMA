@@ -1,0 +1,1057 @@
+
+/* =====================================================
+   BERANGKAS NAKAMA
+   DARK NAVY - BLACK - RED
+   FULL CSS + DASHBOARD MINYAK & STRAP
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap');
+
+/* ROOT */
+:root {
+  --nav:#101620;
+  --red:#e63946;
+  --red-hover:#ff4d5a;
+  --green:#22c55e;
+  --blue:#38bdf8;
+  --yellow:#f59e0b;
+
+  --bg:#0b0e14;
+  --panel:rgba(23,30,42,.91);
+  --panel-light:rgba(29,38,52,.92);
+
+  --ink:#f1f5f9;
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --line:rgba(148,163,184,.18);
+  --white:#fff;
+
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --radius:14px;
+}
+
+/* RESET */
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+
+  background-color:#0b0e14;
+  background-image:
+    linear-gradient(rgba(5,9,16,.48),rgba(5,9,16,.48)),
+    url("assets/NAKAMA.webp");
+  background-position:center center;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  color:var(--ink);
+  font-family:'Inter',Arial,sans-serif;
+}
+
+button,input,select,textarea {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+button:disabled {
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.hidden {
+  display:none!important;
+}
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+.login-wrap {
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+
+  background-color:transparent;
+  background-image:none;
+}
+
+.login-card {
+  width:min(420px,100%);
+  padding:35px;
+
+  background:rgba(17,23,34,.78);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+
+  box-shadow:0 25px 80px #0009;
+}
+
+.login-card h1 {
+  color:white;
+  font:800 29px/1.15 Manrope,sans-serif;
+  margin:8px 0;
+}
+
+.login-card .muted {
+  color:var(--muted);
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.brand {
+  width:52px;
+  height:52px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:14px;
+  background:transparent;
+
+  margin-bottom:20px;
+  overflow:hidden;
+}
+
+.brand img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+.side-brand .brand {
+  width:38px;
+  height:38px;
+  margin:0;
+  flex-shrink:0;
+}
+
+.side-brand .brand img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.eyebrow {
+  color:var(--red);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  margin:0 0 8px;
+}
+
+.muted {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+label {
+  display:block;
+  color:#d7deea;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+input,
+select,
+textarea {
+  width:100%;
+  padding:12px 14px;
+
+  border:1px solid var(--line);
+  border-radius:9px;
+
+  background:rgba(8,13,22,.85);
+  color:var(--ink);
+
+  outline:none;
+  margin-top:7px;
+  min-height:43px;
+
+  transition:border .2s,box-shadow .2s,background .2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color:var(--red);
+  box-shadow:0 0 0 3px rgba(230,57,70,.12);
+  background:rgba(8,13,22,.96);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color:#64748b;
+}
+
+select {
+  cursor:pointer;
+}
+
+select option {
+  background:#171e2a;
+  color:var(--ink);
+}
+
+textarea {
+  resize:vertical;
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.btn {
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+
+  border:1px solid transparent;
+  border-radius:9px;
+
+  padding:11px 16px;
+  min-height:41px;
+
+  font-size:12px;
+  font-weight:800;
+
+  transition:.2s;
+}
+
+.primary {
+  background:var(--red);
+  color:white;
+}
+
+.primary:hover {
+  background:var(--red-hover);
+  transform:translateY(-1px);
+}
+
+.outline {
+  background:var(--panel-light);
+  border-color:var(--line);
+  color:var(--ink);
+}
+
+.outline:hover {
+  background:#2a3546;
+}
+
+.full {
+  width:100%;
+}
+
+/* =====================================================
+   LOGIN MESSAGE
+===================================================== */
+
+.login-error,
+.message {
+  font-size:12px;
+  min-height:16px;
+  margin:10px 0;
+}
+
+.login-error {
+  color:#fca5a5;
+}
+
+.message {
+  color:#86efac;
+}
+
+.message.error {
+  color:#fca5a5;
+}
+
+/* =====================================================
+   DEMO
+===================================================== */
+
+.demo {
+  margin-top:20px;
+  padding:12px;
+
+  background:rgba(32,42,57,.8);
+  border:1px solid var(--line);
+  border-radius:9px;
+
+  font-size:12px;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* =====================================================
+   APPLICATION
+===================================================== */
+
+.app {
+  min-height:100vh;
+  background:transparent;
+}
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+  position:fixed;
+  inset:0 auto 0 0;
+  width:245px;
+
+  background:rgba(12,18,28,.91);
+  backdrop-filter:blur(15px);
+  -webkit-backdrop-filter:blur(15px);
+
+  border-right:1px solid var(--line);
+  color:white;
+
+  padding:22px 16px;
+
+  display:flex;
+  flex-direction:column;
+
+  z-index:5;
+  overflow-y:auto;
+}
+
+.side-brand {
+  display:flex;
+  align-items:center;
+  gap:11px;
+
+  padding:0 8px 30px;
+
+  font-weight:800;
+  font-family:Manrope,sans-serif;
+  color:white;
+}
+
+.side-brand small {
+  display:block;
+  color:var(--red);
+  font-size:9px;
+  letter-spacing:1.5px;
+  margin-top:4px;
+}
+
+nav {
+  display:grid;
+  gap:6px;
+}
+
+.nav-btn {
+  width:100%;
+  border:0;
+
+  background:transparent;
+  color:#cbd5e1;
+
+  text-align:left;
+  padding:13px 12px;
+
+  border-radius:9px;
+  font-size:14px;
+  font-weight:600;
+
+  transition:.2s;
+}
+
+.nav-btn:hover {
+  background:var(--panel-light);
+  color:white;
+}
+
+.nav-btn.active {
+  background:rgba(230,57,70,.15);
+  color:white;
+  box-shadow:inset 3px 0 var(--red);
+}
+
+.side-bottom {
+  margin-top:auto;
+}
+
+.side-user {
+  color:#c3cad4;
+  padding:13px 8px;
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main {
+  margin-left:245px;
+  padding:28px 34px;
+
+  max-width:1700px;
+  min-width:0;
+}
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.topbar h2 {
+  color:#ffffff!important;
+  font:800 24px Manrope,sans-serif;
+  margin:0;
+}
+
+.top-user {
+  text-align:right;
+  color:var(--muted);
+  font-size:11px;
+
+  display:grid;
+  gap:5px;
+}
+
+.top-user b {
+  color:white;
+  font-size:13px;
+}
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+  width:100%;
+}
+
+.section-intro {
+  margin:22px 0 14px;
+}
+
+.section-intro h2 {
+  color:#ffffff!important;
+  font:800 24px Manrope,sans-serif;
+  margin:0;
+}
+
+.section-intro h3 {
+  color:#ffffff;
+  font:800 17px Manrope,sans-serif;
+  margin:0;
+}
+
+.section-intro p:last-child {
+  margin:7px 0;
+}
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.welcome {
+  background:linear-gradient(
+    110deg,
+    rgba(24,38,58,.92),
+    rgba(38,59,85,.92)
+  );
+
+  color:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+
+  padding:25px 28px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  margin-bottom:22px;
+}
+
+.welcome h2 {
+  color:white;
+  font:800 22px Manrope,sans-serif;
+  margin:0;
+}
+
+.welcome .eyebrow {
+  color:#ff938d;
+}
+
+.welcome .muted {
+  color:#bdc7d4;
+}
+
+.welcome-icon {
+  font-size:45px;
+  color:#ffffff45;
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:13px;
+  margin-bottom:20px;
+}
+
+.stat {
+  position:relative;
+
+  background:rgba(23,30,42,.91);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:13px;
+
+  padding:19px;
+  min-width:0;
+
+  box-shadow:var(--shadow);
+
+  transition:
+    transform .2s,
+    border-color .2s,
+    background .2s;
+}
+
+.stat:hover {
+  transform:translateY(-2px);
+  border-color:rgba(230,57,70,.35);
+}
+
+.stat span {
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:600;
+}
+
+.stat strong {
+  display:block;
+  color:white;
+
+  font:800 clamp(17px,2vw,23px) Manrope,sans-serif;
+
+  margin:12px 0 5px;
+  overflow-wrap:anywhere;
+}
+
+.stat small {
+  color:#94a3b8;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.stat.dark {
+  background:linear-gradient(
+    135deg,
+    rgba(153,27,27,.96),
+    rgba(230,57,70,.94)
+  );
+
+  color:white;
+  border-color:rgba(230,57,70,.8);
+}
+
+.stat.dark span,
+.stat.dark small {
+  color:#ffe4e2;
+}
+
+.stat.dark strong {
+  color:white;
+}
+
+/* =====================================================
+   DASHBOARD TRANSAKSI
+===================================================== */
+
+#page-dashboard > .stats:last-of-type {
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+#page-dashboard > .stats:last-of-type .stat {
+  min-height:90px;
+}
+
+/* =====================================================
+   PANEL
+===================================================== */
+
+.panel {
+  background:rgba(23,30,42,.91);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:14px;
+
+  padding:21px;
+  margin-bottom:18px;
+
+  min-width:0;
+  box-shadow:var(--shadow);
+}
+
+.panel h3 {
+  color:white;
+  font:800 16px Manrope,sans-serif;
+  margin:0 0 15px;
+}
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 18px;
+}
+
+.wide {
+  grid-column:1/-1;
+}
+
+.form-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  margin-top:15px;
+}
+
+/* =====================================================
+   RINCIAN STOK STRAP
+   DE - TEC 9 - PITON - MEC 9
+===================================================== */
+
+.strap-stock-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:15px;
+}
+
+.strap-stock-item {
+  position:relative;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+
+  min-width:0;
+  padding:16px;
+
+  background:rgba(10,16,26,.72);
+  border:1px solid rgba(148,163,184,.16);
+  border-radius:12px;
+
+  transition:
+    border-color .2s,
+    background .2s,
+    transform .2s;
+}
+
+.strap-stock-item:hover {
+  background:rgba(30,40,55,.88);
+  border-color:rgba(230,57,70,.55);
+  transform:translateY(-2px);
+}
+
+.strap-stock-item span {
+  color:#dbe4f0;
+  font-size:13px;
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+
+.strap-stock-item strong {
+  color:#ff6570;
+  font:800 17px Manrope,sans-serif;
+  white-space:nowrap;
+}
+
+/* BELUM DIKATEGORIKAN */
+.strap-stock-item:last-child {
+  border-color:rgba(245,158,11,.25);
+  background:rgba(245,158,11,.055);
+}
+
+.strap-stock-item:last-child span {
+  color:#fbbf24;
+}
+
+.strap-stock-item:last-child strong {
+  color:#fbbf24;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-wrap {
+  width:100%;
+  overflow-x:auto;
+
+  border:1px solid var(--line);
+  border-radius:9px;
+}
+
+table {
+  width:100%;
+  min-width:650px;
+
+  border-collapse:collapse;
+  white-space:nowrap;
+
+  background:rgba(23,30,42,.85);
+}
+
+th {
+  text-align:left;
+
+  color:#dce5f2;
+  font-size:10px;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+
+  padding:12px 10px;
+
+  background:rgba(32,42,57,.96);
+  border-bottom:1px solid var(--line);
+}
+
+td {
+  color:#d1d9e6;
+
+  padding:12px 10px;
+
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+
+tbody tr:hover {
+  background:rgba(255,255,255,.035);
+}
+
+.type {
+  display:inline-block;
+
+  border-radius:20px;
+  padding:5px 9px;
+
+  background:#293344;
+  color:#d1d9e6;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+.type.in {
+  background:rgba(34,197,94,.12);
+  color:#86efac;
+}
+
+.type.out {
+  background:rgba(230,57,70,.12);
+  color:#fca5a5;
+}
+
+.type.stock {
+  background:rgba(56,189,248,.12);
+  color:#7dd3fc;
+}
+
+.amount {
+  font-weight:800;
+}
+
+.positive {
+  color:var(--green);
+}
+
+.negative {
+  color:#fb7185;
+}
+
+.empty {
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+}
+
+/* =====================================================
+   FILTERS
+===================================================== */
+
+.filters {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.filters input,
+.filters select {
+  margin:0;
+}
+
+/* =====================================================
+   TABLE FOOT
+===================================================== */
+
+.table-foot {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding-top:14px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+  text-align:center;
+  padding:25px 0 10px;
+
+  color:#94a3b8;
+  font-size:10px;
+  letter-spacing:.7px;
+}
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+#logoutBtn {
+  color:#fca5a5;
+  background:rgba(230,57,70,.10);
+  border-color:rgba(230,57,70,.25);
+}
+
+#logoutBtn:hover {
+  color:white;
+  background:#991b1b;
+}
+
+/* =====================================================
+   ZOOM CONTROL
+===================================================== */
+
+#zoomLevel {
+  color:#fca5a5;
+  font-size:11px;
+  font-weight:800;
+}
+
+/* =====================================================
+   RESPONSIVE TABLET
+===================================================== */
+
+@media(max-width:1100px) {
+  .sidebar {
+    width:205px;
+  }
+
+  .main {
+    margin-left:205px;
+    padding:24px 20px;
+  }
+
+  .stats {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+/* =====================================================
+   RESPONSIVE MOBILE
+===================================================== */
+
+@media(max-width:700px) {
+  .sidebar {
+    position:static;
+    width:100%;
+    padding:12px;
+  }
+
+  .side-brand {
+    padding:0 5px 12px;
+  }
+
+  nav {
+    display:flex;
+    overflow-x:auto;
+    padding-bottom:5px;
+  }
+
+  .nav-btn {
+    white-space:nowrap;
+    flex-shrink:0;
+    padding:10px;
+  }
+
+  .side-bottom {
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:8px;
+  }
+
+  .side-user {
+    flex:1;
+    padding:5px;
+  }
+
+  .side-bottom .btn {
+    width:auto;
+  }
+
+  .main {
+    margin:0;
+    padding:18px 12px;
+  }
+
+  .topbar h2 {
+    font-size:20px;
+  }
+
+  .top-user span {
+    display:none;
+  }
+
+  .welcome {
+    padding:19px;
+  }
+
+  .welcome h2 {
+    font-size:18px;
+  }
+
+  .welcome-icon {
+    font-size:30px;
+  }
+
+  .stats {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+
+  .stat {
+    padding:13px;
+  }
+
+  .stat strong {
+    font-size:17px;
+  }
+
+  .panel {
+    padding:14px;
+  }
+
+  .form-grid {
+    grid-template-columns:1fr;
+  }
+
+  .wide {
+    grid-column:auto;
+  }
+
+  .filters {
+    grid-template-columns:1fr 1fr;
+  }
+
+  .filters input:first-child {
+    grid-column:1/-1;
+  }
+
+  .login-card {
+    padding:27px 22px;
+  }
+
+  .strap-stock-grid {
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+
+  .strap-stock-item {
+    padding:14px;
+  }
+}
+
+/* =====================================================
+   SMALL SCREEN
+===================================================== */
+
+@media(max-width:380px) {
+  .stats,
+  .filters {
+    grid-template-columns:1fr;
+  }
+
+  .filters input:first-child {
+    grid-column:auto;
+  }
+
+  .strap-stock-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+/* INPUT ANGKA TRANSAKSI */
+input[type="number"] {
+  appearance:textfield;
+  -moz-appearance:textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+}

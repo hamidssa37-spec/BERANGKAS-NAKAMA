@@ -1,0 +1,949 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827">
+
+<title>BERANGKAS NAKAMA</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= LOGIN ================= -->
+
+<section id="loginView" class="login-wrap">
+
+  <form id="loginForm" class="login-card">
+
+    <div class="brand">
+      <img src="assets/NAKAMA.webp" alt="Logo BERANGKAS NAKAMA">
+    </div>
+
+    <p class="eyebrow">SISTEM KEUANGAN LOKAL</p>
+
+    <h1>BERANGKAS<br>NAKAMA</h1>
+
+    <p class="muted">Silakan login untuk melanjutkan.</p>
+
+    <label>Username
+      <input
+        id="loginUsername"
+        required
+        autocomplete="username"
+        placeholder="Username"
+      >
+    </label>
+
+    <label>Password
+      <input
+        id="loginPassword"
+        type="password"
+        required
+        autocomplete="current-password"
+        placeholder="Password"
+      >
+    </label>
+
+    <button class="btn primary full" type="submit">
+      LOGIN
+    </button>
+
+    <p id="loginError" class="login-error"></p>
+
+    <div class="demo">
+      <b>Akun awal</b><br>
+      Admin: admin / admin123<br>
+      Petugas: petugas / petugas123
+    </div>
+
+  </form>
+
+</section>
+
+
+<!-- ================= APLIKASI ================= -->
+
+<div id="appView" class="app hidden">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div class="side-brand">
+
+      <div class="brand">
+        <img src="assets/NAKAMA.webp" alt="Logo BERANGKAS NAKAMA">
+      </div>
+
+      <div>
+        BERANGKAS
+        <small>NAKAMA</small>
+      </div>
+
+    </div>
+
+    <nav>
+
+      <button class="nav-btn active" data-page="dashboard">
+        ▦ Dashboard Keuangan
+      </button>
+
+      <button class="nav-btn" data-page="transaksi">
+        ＋ Input Transaksi
+      </button>
+
+      <button class="nav-btn" data-page="riwayat">
+        ↻ Riwayat Transaksi
+      </button>
+
+      <button class="nav-btn" data-page="stok">
+        ▣ Stok Barang
+      </button>
+
+      <button class="nav-btn" data-page="penjualan">
+        ▤ Penjualan
+      </button>
+
+      <button class="nav-btn" data-page="laporan">
+        ▥ Laporan
+      </button>
+
+      <button class="nav-btn admin-only" data-page="pengguna">
+        ♙ Kelola Pengguna
+      </button>
+
+    </nav>
+
+    <div class="side-bottom">
+
+      <div id="sideUser" class="side-user"></div>
+
+      <button id="logoutBtn" class="btn outline full">
+        Keluar
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- KONTEN UTAMA -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div>
+        <p class="eyebrow">BERANGKAS NAKAMA</p>
+        <h2 id="pageTitle">Dashboard Keuangan</h2>
+      </div>
+
+      <div class="top-user">
+        <span id="todayText"></span>
+        <b id="topUsername"></b>
+      </div>
+
+    </header>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="page-dashboard" class="page">
+
+      <div class="welcome">
+
+        <div>
+          <p class="eyebrow">RINGKASAN KEUANGAN</p>
+
+          <h2>Kontrol keuangan berangkas.</h2>
+
+          <p class="muted">
+            Pantau saldo uang, persediaan minyak, dan stok Strap.
+          </p>
+        </div>
+
+        <div class="welcome-icon">▣</div>
+
+      </div>
+
+
+      <!-- DASHBOARD UANG KAS -->
+
+      <div class="section-intro">
+        <p class="eyebrow">KEUANGAN</p>
+        <h3>Ringkasan Uang Kas</h3>
+      </div>
+
+      <div class="stats">
+
+        <article class="stat dark">
+          <span>Uang Kas</span>
+          <strong id="cashBalance">Rp0</strong>
+          <small>Saldo uang tunai</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Pemasukan</span>
+          <strong id="incomeTotal">Rp0</strong>
+          <small>Pemasukan dan penjualan uang</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Pengeluaran</span>
+          <strong id="expenseTotal">Rp0</strong>
+          <small>Pengeluaran dan pembelian uang</small>
+        </article>
+
+      </div>
+
+
+      <!-- DASHBOARD STOK MINYAK -->
+
+      <div class="section-intro">
+        <p class="eyebrow">PERSEDIAAN</p>
+        <h3>Ringkasan Stok Minyak</h3>
+      </div>
+
+      <div class="stats">
+
+        <article class="stat dark">
+          <span>Stok Minyak</span>
+          <strong id="dashboardOil">0 Jerigen</strong>
+          <small>Saldo minyak saat ini</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Minyak Masuk</span>
+          <strong id="dashboardOilIn">0 Jerigen</strong>
+          <small>Setoran dan pembelian minyak</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Minyak Keluar</span>
+          <strong id="dashboardOilOut">0 Jerigen</strong>
+          <small>Penjualan dan penggunaan minyak</small>
+        </article>
+
+      </div>
+
+
+      <!-- DASHBOARD STOK STRAP -->
+
+      <div class="section-intro">
+        <p class="eyebrow">PERSEDIAAN</p>
+        <h3>Ringkasan Stok Strap</h3>
+      </div>
+
+      <div class="stats">
+
+        <article class="stat dark">
+          <span>Stok Strap</span>
+          <strong id="dashboardStrap">0 pcs</strong>
+          <small>Total saldo semua kategori</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Strap Masuk</span>
+          <strong id="dashboardStrapIn">0 pcs</strong>
+          <small>Total pembelian Strap</small>
+        </article>
+
+        <article class="stat">
+          <span>Total Strap Keluar</span>
+          <strong id="dashboardStrapOut">0 pcs</strong>
+          <small>Total penjualan Strap</small>
+        </article>
+
+      </div>
+
+
+      <!-- TOTAL TRANSAKSI -->
+
+      <div class="stats">
+
+        <article class="stat">
+          <span>Total Transaksi</span>
+          <strong id="transactionCount">0</strong>
+          <small>Total transaksi tercatat</small>
+        </article>
+
+      </div>
+
+
+      <!-- TRANSAKSI TERBARU -->
+
+      <div class="panel">
+
+        <h3>Transaksi Terbaru</h3>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Keterangan</th>
+                <th>Barang</th>
+                <th>Jumlah</th>
+                <th>Nominal</th>
+              </tr>
+            </thead>
+
+            <tbody id="recentRows"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= INPUT TRANSAKSI ================= -->
+
+    <section id="page-transaksi" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">PENCATATAN</p>
+
+        <h2>Input Transaksi</h2>
+
+        <p class="muted">
+          Pilih jenis transaksi sesuai aktivitas sebenarnya.
+        </p>
+
+      </div>
+
+
+      <form id="transactionForm" class="panel">
+
+        <div class="form-grid">
+
+          <label>Jenis Transaksi
+            <select id="txType" required>
+              <option value="Pemasukan">Pemasukan</option>
+              <option value="Pengeluaran">Pengeluaran</option>
+              <option value="Setoran Minyak">Setoran Minyak</option>
+              <option value="Pembelian Minyak">Pembelian Minyak</option>
+              <option value="Penjualan Minyak">Penjualan Minyak</option>
+              <option value="Pembelian Strap">Pembelian Strap</option>
+              <option value="Penjualan Strap">Penjualan Strap</option>
+            </select>
+          </label>
+
+
+          <label>Tanggal
+            <input id="txDate" type="date" required>
+          </label>
+
+
+          <label id="methodWrap" class="hidden">
+            Metode Transaksi
+
+            <select id="txMethod">
+              <option value="Uang">Menggunakan Uang</option>
+              <option value="Minyak">Menggunakan Minyak</option>
+            </select>
+          </label>
+
+
+          <!-- KATEGORI STRAP -->
+
+          <label id="strapCategoryWrap" class="hidden">
+            Kategori Strap
+
+            <select id="txStrapCategory">
+  <option value="DE">DE</option>
+  <option value="TEC 9">TEC 9</option>
+  <option value="PITON">PITON</option>
+  <option value="MEC 9">MEC 9</option>
+  <option value="PISTOL">PISTOL</option>
+</select>
+          </label>
+
+
+          <label id="quantityWrap" class="hidden">
+  Jumlah Barang
+
+  <input
+    id="txQuantity"
+    type="number"
+    min="0"
+    step="1"
+    placeholder="Jumlah barang"
+  >
+</label>
+
+
+          <label id="oilQuantityWrap" class="hidden">
+  Jumlah Minyak
+
+  <input
+    id="txOilQuantity"
+    type="number"
+    min="0"
+    step="1"
+    placeholder="Jumlah jerigen minyak"
+  >
+</label>
+
+
+          <label id="amountWrap">
+  Nominal Uang (Rp)
+
+  <input
+    id="txAmount"
+    type="number"
+    min="0"
+    step="1"
+    placeholder="Nominal transaksi"
+  >
+</label>
+
+          <label class="wide">
+            Keterangan
+
+            <input
+              id="txDescription"
+              maxlength="120"
+              required
+              placeholder="Contoh: pembelian strap"
+            >
+          </label>
+
+
+          <label class="wide">
+            Catatan
+
+            <textarea
+              id="txNote"
+              rows="2"
+              placeholder="Catatan tambahan (opsional)"
+            ></textarea>
+          </label>
+
+        </div>
+
+
+        <p id="txInfo" class="muted"></p>
+
+
+        <div class="form-actions">
+
+          <button type="reset" class="btn outline">
+            Reset
+          </button>
+
+          <button type="submit" class="btn primary">
+            Simpan Transaksi
+          </button>
+
+        </div>
+
+
+        <p id="txMessage" class="message"></p>
+
+      </form>
+
+    </section>
+
+
+    <!-- ================= RIWAYAT TRANSAKSI ================= -->
+
+    <section id="page-riwayat" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">ARSIP</p>
+
+        <h2>Riwayat Transaksi</h2>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="filters">
+
+          <input
+            id="historySearch"
+            placeholder="Cari transaksi..."
+          >
+
+          <select id="historyType">
+
+            <option value="">Semua Transaksi</option>
+            <option>Pemasukan</option>
+            <option>Pengeluaran</option>
+            <option>Setoran Minyak</option>
+            <option>Pembelian Minyak</option>
+            <option>Penjualan Minyak</option>
+            <option>Pembelian Strap</option>
+            <option>Penjualan Strap</option>
+
+          </select>
+
+          <button id="exportHistory" class="btn outline">
+            Export CSV
+          </button>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Metode</th>
+                <th>Keterangan</th>
+                <th>Jumlah</th>
+                <th>Nominal</th>
+                <th>Petugas</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody id="historyRows"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="table-foot">
+          <span id="historyCount" class="muted"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= STOK BARANG ================= -->
+
+    <section id="page-stok" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">INVENTARIS</p>
+
+        <h2>Stok Barang</h2>
+
+        <p class="muted">
+          Persediaan minyak dan Strap saat ini.
+        </p>
+
+      </div>
+
+
+      <div class="stats">
+
+        <article class="stat dark">
+          <span>Stok Minyak</span>
+          <strong id="stockOil">0</strong>
+          <small>Jerigen</small>
+        </article>
+
+        <article class="stat">
+          <span>Stok Strap</span>
+          <strong id="stockStrap">0</strong>
+          <small>Pcs</small>
+        </article>
+
+      </div>
+
+
+      <!-- RINCIAN KATEGORI STRAP -->
+
+      <div class="panel">
+
+        <h3>Rincian Stok Strap</h3>
+
+        <p class="muted">
+          Stok setiap kategori dihitung secara terpisah.
+        </p>
+
+        <div id="stockStrapBreakdown" class="strap-stock-grid">
+
+          <div class="strap-stock-item">
+            <span>DE</span>
+            <strong>0 pcs</strong>
+          </div>
+
+          <div class="strap-stock-item">
+            <span>TEC 9</span>
+            <strong>0 pcs</strong>
+          </div>
+
+          <div class="strap-stock-item">
+            <span>PITON</span>
+            <strong>0 pcs</strong>
+          </div>
+
+          <div class="strap-stock-item">
+            <span>MEC 9</span>
+            <strong>0 pcs</strong>
+          </div>
+
+          <div class="strap-stock-item">
+            <span>Belum dikategorikan</span>
+            <strong>0 pcs</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- RIWAYAT STOK -->
+
+      <div class="panel">
+
+        <h3>Riwayat Pergerakan Barang</h3>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis Transaksi</th>
+                <th>Barang</th>
+                <th>Masuk</th>
+                <th>Keluar</th>
+                <th>Petugas</th>
+              </tr>
+            </thead>
+
+            <tbody id="stockRows"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="table-foot">
+
+          <span class="muted">
+            Riwayat pergerakan stok berdasarkan transaksi.
+          </span>
+
+          <button id="exportStock" class="btn outline">
+            Export CSV
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= DASHBOARD PENJUALAN ================= -->
+
+    <section id="page-penjualan" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">PENJUALAN</p>
+
+        <h2>Dashboard Penjualan</h2>
+
+      </div>
+
+
+      <div class="stats">
+
+        <article class="stat dark">
+          <span>Uang Hasil Penjualan</span>
+          <strong id="salesMoney">Rp0</strong>
+          <small>Penjualan yang diterima uang</small>
+        </article>
+
+        <article class="stat">
+          <span>Minyak Diterima</span>
+          <strong id="salesOilReceived">0</strong>
+          <small>Jerigen dari penjualan Strap</small>
+        </article>
+
+        <article class="stat">
+          <span>Minyak Terjual</span>
+          <strong id="salesOilSold">0</strong>
+          <small>Jerigen</small>
+        </article>
+
+        <article class="stat">
+          <span>Strap Terjual</span>
+          <strong id="salesStrapSold">0</strong>
+          <small>Pcs</small>
+        </article>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h3>Riwayat Penjualan</h3>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Metode</th>
+                <th>Keterangan</th>
+                <th>Jumlah Barang</th>
+                <th>Nominal Uang</th>
+                <th>Petugas</th>
+              </tr>
+            </thead>
+
+            <tbody id="salesRows"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="table-foot">
+
+          <span id="salesCount" class="muted"></span>
+
+          <button id="exportSales" class="btn outline">
+            Export CSV
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= LAPORAN ================= -->
+
+    <section id="page-laporan" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">REKAPITULASI</p>
+
+        <h2>Laporan</h2>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="filters">
+
+          <input
+            id="reportFrom"
+            type="date"
+            aria-label="Dari tanggal"
+          >
+
+          <input
+            id="reportTo"
+            type="date"
+            aria-label="Sampai tanggal"
+          >
+
+          <button id="generateReport" class="btn primary">
+            Tampilkan
+          </button>
+
+        </div>
+
+
+        <div class="stats">
+
+          <article class="stat">
+            <span>Pemasukan Uang</span>
+            <strong id="reportIncome">Rp0</strong>
+          </article>
+
+          <article class="stat">
+            <span>Pengeluaran Uang</span>
+            <strong id="reportExpense">Rp0</strong>
+          </article>
+
+          <article class="stat">
+            <span>Minyak Masuk</span>
+            <strong id="reportOilIn">0</strong>
+          </article>
+
+          <article class="stat">
+            <span>Minyak Keluar</span>
+            <strong id="reportOilOut">0</strong>
+          </article>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Tanggal</th>
+                <th>Jenis</th>
+                <th>Keterangan</th>
+                <th>Metode</th>
+                <th>Jumlah</th>
+                <th>Nominal</th>
+              </tr>
+            </thead>
+
+            <tbody id="reportRows"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="table-foot">
+
+          <span class="muted">
+            Laporan sesuai rentang tanggal.
+          </span>
+
+          <button id="exportReport" class="btn outline">
+            Export CSV
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= KELOLA PENGGUNA ================= -->
+
+    <section id="page-pengguna" class="page hidden">
+
+      <div class="section-intro">
+
+        <p class="eyebrow">AKSES APLIKASI</p>
+
+        <h2>Kelola Pengguna</h2>
+
+      </div>
+
+
+      <div class="panel">
+
+        <form id="userForm">
+
+          <div class="form-grid">
+
+            <label>Nama Lengkap
+              <input
+                id="newName"
+                required
+                maxlength="60"
+              >
+            </label>
+
+            <label>Username
+              <input
+                id="newUsername"
+                required
+                minlength="3"
+                maxlength="30"
+              >
+            </label>
+
+            <label>Password
+              <input
+                id="newPassword"
+                type="password"
+                required
+                minlength="6"
+              >
+            </label>
+
+            <label>Role
+              <select id="newRole">
+                <option>Petugas</option>
+                <option>Admin</option>
+              </select>
+            </label>
+
+          </div>
+
+
+          <button class="btn primary" type="submit">
+            Tambah Pengguna
+          </button>
+
+          <p id="userMessage" class="message"></p>
+
+        </form>
+
+      </div>
+
+
+      <div class="panel">
+
+        <h3>Daftar Pengguna</h3>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+
+            <tbody id="userRows"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+      BERANGKAS NAKAMA • Data tersimpan di browser komputer ini
+    </footer>
+
+  </main>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="app.js" defer></script>
+
+</body>
+</html>
